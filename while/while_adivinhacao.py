@@ -10,7 +10,8 @@ rodada = 1
 # laço de repetiçao while
 while (rodada <= numero_tentativas):
 
-    print("rodada",rodada,"de", numero_tentativas, sep=" ")
+    # formatação de string interpolacao de string
+    print("rodada {} de {}".format(rodada, numero_tentativas))
     # o input sempre recebe uma string
     chute_str = input("Digite um numero: ")
     # converter de str para int
