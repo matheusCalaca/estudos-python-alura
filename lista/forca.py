@@ -42,6 +42,7 @@ while not enforcou and not acertou:
             index = index + 1
     else:
         erros += 1
+        print(f"Ops, você errou! Faltam {6 - erros} tentativas.")
     enforcou = erros == quantidade_erros_para_enforca
     acertou = "_" not in letras_acertadas
     print(letras_acertadas)
