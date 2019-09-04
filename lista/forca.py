@@ -7,7 +7,7 @@ def jogar():
 
 
 # variaveis
-palavra_secreta = "banana"
+palavra_secreta = "banana".upper()
 # no python para definiçao de uma lista se usa o "[]", no exmplo abaixo e passado uma lista com a quantidade
 # de caracteres da palavra_secreta
 letras_acertadas = ["_", "_", "_", "_", "_", "_"]
@@ -16,27 +16,40 @@ letras_acertadas = ["_", "_", "_", "_", "_", "_"]
 # essa variavel e booleana pode ser "True" ou "False"
 enforcou = False
 acertou = False
+# criando variaveis para verificar a quantidade de erros
+erros = 0
+quantidade_erros_para_enforca = 6
 
 
 print(letras_acertadas)
 
 # para negar se usa a palavra "not" e para a condiciona usa se a palavra "and"
-while (not enforcou and not acertou):
+while not enforcou and not acertou:
     chute = input("Qual letra? ")
     # remove os espaços da string "strip()"
-    chute = chute.strip()
+    chute = chute.strip().upper()
 
-    index = 0
-    # for pela iterando por cada letra da palavra
-    for letra in palavra_secreta:
-        # verifica se a letra digitada tem no chute
-        # usa o metodo upper para colocar tudo maiuscolo para fazer a comparação metodo "str.upper()"
-        if (chute.upper() == letra.upper()):
-            # adiciona a letra caso tenha acertado no local correto do arry
-            letras_acertadas[index] = letra
-        index = index + 1
-
+    # verifica se palavra contem o chute
+    if(chute in palavra_secreta):
+        index = 0
+        # for pela iterando por cada letra da palavra
+        for letra in palavra_secreta:
+            # verifica se a letra digitada tem no chute
+            # usa o metodo upper para colocar tudo maiuscolo para fazer a comparação metodo "str.upper()"
+            if (chute == letra):
+                # adiciona a letra caso tenha acertado no local correto do arry
+                letras_acertadas[index] = letra
+            index = index + 1
+    else:
+        erros += 1
+    enforcou = erros == quantidade_erros_para_enforca
+    acertou = "_" not in letras_acertadas
     print(letras_acertadas)
+
+if acertou:
+    print("Você GANHOU!")
+else:
+    print("Você PERDEU!")
 print("fim de jogo ")
 
 # esse codigop so vai executar quando o este arquivo for executado como arquivo principal
