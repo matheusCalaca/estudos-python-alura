@@ -7,10 +7,11 @@ def jogar():
 
 
 # variaveis
-palavra_secreta = "banana".upper()
+palavra_secreta = "calaca".upper()
 # no python para definiçao de uma lista se usa o "[]", no exmplo abaixo e passado uma lista com a quantidade
 # de caracteres da palavra_secreta
-letras_acertadas = ["_", "_", "_", "_", "_", "_"]
+# adicionado um for dentro da gerção da palavra
+letras_acertadas = ["_" for letra in palavra_secreta]
 
 # definindo uma variavel  para ver se a forca acabou
 # essa variavel e booleana pode ser "True" ou "False"
