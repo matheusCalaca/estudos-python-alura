@@ -1,13 +1,27 @@
 # para definir uma funcao no python voce usa a palavra "def" segue o examplo encapsulando o jogo em uma função para ser
 # chamado em outro arquivo
+import random
+
+
 def jogar():
     print("********************************")
     print("***Bem vindo ao jogo de Forca***")
     print("********************************")
 
+# operando arquivo de texto
+# abrindo o arquivo
+arquivo = open("../palavra.txt", "r")
+lista_palavras = []
+# ler cada linha e adiciona no arquivo removendo os caracteres especiais como '\n' ou espaços
+for linha in arquivo:
+    lista_palavras.append(linha.strip())
+
+# fechando o arquivo
+arquivo.close()
+numero_rando_palavra = random.randrange(0, (len(lista_palavras) - 1))
 
 # variaveis
-palavra_secreta = "calaca".upper()
+palavra_secreta = lista_palavras[numero_rando_palavra].upper()
 # no python para definiçao de uma lista se usa o "[]", no exmplo abaixo e passado uma lista com a quantidade
 # de caracteres da palavra_secreta
 # adicionado um for dentro da gerção da palavra
