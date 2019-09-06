@@ -10,15 +10,16 @@ def jogar():
 
 # operando arquivo de texto
 # abrindo o arquivo
-arquivo = open("../palavra.txt", "r")
-lista_palavras = []
-# ler cada linha e adiciona no arquivo removendo os caracteres especiais como '\n' ou espaços
-for linha in arquivo:
-    lista_palavras.append(linha.strip())
+# garente que caso de falha o arquivo seja fechado com a estrutura with
+with open("../palavra.txt", "r") as arquivo:
+    lista_palavras = []
+    # ler cada linha e adiciona no arquivo removendo os caracteres especiais como '\n' ou espaços
+    for linha in arquivo:
+        lista_palavras.append(linha.strip())
 
-# fechando o arquivo
-arquivo.close()
-numero_rando_palavra = random.randrange(0, (len(lista_palavras) - 1))
+    # fechando o arquivo
+    arquivo.close()
+numero_rando_palavra = random.randrange(0, len(lista_palavras) )
 
 # variaveis
 palavra_secreta = lista_palavras[numero_rando_palavra].upper()
