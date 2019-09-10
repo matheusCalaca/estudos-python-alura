@@ -7,9 +7,6 @@ def jogar():
     imprime_mensagem_abertura()
     # variaveis
     palavra_secreta = carrega_palavra_secreta()
-    # no python para definiçao de uma lista se usa o "[]", no exmplo abaixo e passado uma lista com a quantidade
-    # de caracteres da palavra_secreta
-    # adicionado um for dentro da gerção da palavra
     letras_acertadas = inicializa_letras_acertadas(palavra_secreta)
 
     # definindo uma variavel  para ver se a forca acabou
@@ -18,43 +15,139 @@ def jogar():
     acertou = False
     # criando variaveis para verificar a quantidade de erros
     erros = 0
-    quantidade_erros_para_enforca = 6
+    quantidade_erros_para_enforca = 7
 
 
     print(letras_acertadas)
 
     # para negar se usa a palavra "not" e para a condiciona usa se a palavra "and"
     while not enforcou and not acertou:
-        chute = input("Qual letra? ")
-        # remove os espaços da string "strip()"
-        chute = chute.strip().upper()
-
+        chute = pode_chute()
         # verifica se palavra contem o chute
         if(chute in palavra_secreta):
-            index = 0
-            # for pela iterando por cada letra da palavra
-            for letra in palavra_secreta:
-                # verifica se a letra digitada tem no chute
-                # usa o metodo upper para colocar tudo maiuscolo para fazer a comparação metodo "str.upper()"
-                if (chute == letra):
-                    # adiciona a letra caso tenha acertado no local correto do arry
-                    letras_acertadas[index] = letra
-                index = index + 1
+            marca_chute_correto(chute, letras_acertadas, palavra_secreta)
         else:
             erros += 1
-            print(f"Ops, você errou! Faltam {6 - erros} tentativas.")
+            print(f"Ops, você errou! Faltam {quantidade_erros_para_enforca - erros} tentativas.")
+            desenha_forca(erros)
         enforcou = erros == quantidade_erros_para_enforca
         acertou = "_" not in letras_acertadas
         print(letras_acertadas)
 
     if acertou:
-        print("Você GANHOU!")
+        imprime_mensagem_vencedor()
     else:
-        print("Você PERDEU!")
+        imprime_mensagem_perdedor(palavra_secreta)
     print("fim de jogo ")
 
 
+
+def imprime_mensagem_vencedor():
+    print("Parabéns, você ganhou!")
+    print("       ___________      ")
+    print("      '._==_==_=_.'     ")
+    print("      .-\\:      /-.    ")
+    print("     | (|:.     |) |    ")
+    print("      '-|:.     |-'     ")
+    print("        \\::.    /      ")
+    print("         '::. .'        ")
+    print("           ) (          ")
+    print("         _.' '._        ")
+    print("        '-------'       ")
+
+def imprime_mensagem_perdedor(palavra_secreta):
+    print("Puxa, você foi enforcado!")
+    print("A palavra era {}".format(palavra_secreta))
+    print("    _______________         ")
+    print("   /               \       ")
+    print("  /                 \      ")
+    print("//                   \/\  ")
+    print("\|   XXXX     XXXX   | /   ")
+    print(" |   XXXX     XXXX   |/     ")
+    print(" |   XXX       XXX   |      ")
+    print(" |                   |      ")
+    print(" \__      XXX      __/     ")
+    print("   |\     XXX     /|       ")
+    print("   | |           | |        ")
+    print("   | I I I I I I I |        ")
+    print("   |  I I I I I I  |        ")
+    print("   \_             _/       ")
+    print("     \_         _/         ")
+    print("       \_______/           ")
+
+def desenha_forca(erros):
+    print("  _______     ")
+    print(" |/      |    ")
+
+    if (erros == 1):
+        print(" |      (_)   ")
+        print(" |            ")
+        print(" |            ")
+        print(" |            ")
+
+    if (erros == 2):
+        print(" |      (_)   ")
+        print(" |      \     ")
+        print(" |            ")
+        print(" |            ")
+
+    if (erros == 3):
+        print(" |      (_)   ")
+        print(" |      \|    ")
+        print(" |            ")
+        print(" |            ")
+
+    if (erros == 4):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |            ")
+        print(" |            ")
+
+    if (erros == 5):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |            ")
+
+    if (erros == 6):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |      /     ")
+
+    if (erros == 7):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |      / \   ")
+
+    print(" |            ")
+    print("_|___         ")
+    print()
+
+def marca_chute_correto(chute, letras_acertadas, palavra_secreta):
+    index = 0
+    # for pela iterando por cada letra da palavra
+    for letra in palavra_secreta:
+        # verifica se a letra digitada tem no chute
+        # usa o metodo upper para colocar tudo maiuscolo para fazer a comparação metodo "str.upper()"
+        if (chute == letra):
+            # adiciona a letra caso tenha acertado no local correto do arry
+            letras_acertadas[index] = letra
+        index = index + 1
+
+
+def pode_chute():
+    chute = input("Qual letra? ")
+    # remove os espaços da string "strip()"
+    chute = chute.strip().upper()
+    return chute
+
+
 def inicializa_letras_acertadas(palavra_secreta):
+    # no python para definiçao de uma lista se usa o "[]", no exmplo abaixo e passado uma lista com a quantidade
+    # de caracteres da palavra_secreta
+    # adicionado um for dentro da gerção da palavra
     return ["_" for letra in palavra_secreta]
 
 
